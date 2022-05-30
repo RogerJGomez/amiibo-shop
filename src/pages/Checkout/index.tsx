@@ -106,13 +106,13 @@ const Checkout: React.FC = (): React.ReactElement => {
 
   return (
     <div className='flex w-full h-5/6 justify-center flex-wrap mt-32'>
-      <div className='bg-white rounded-md p-6 shadow-md w-11/12 lg:w-4/6 mb-6'>
+      <div className='bg-white rounded-md p-6 shadow-md w-11/12 lg:w-9/12 mb-6'>
         <div className='flex flex-col h-full justify-between'>
           <div className='w-full flex justify-between'>
             <Link className='text-lg text-emerald-400' to='/'>
               GO TO SHOP
             </Link>
-            <h1 className='text-lg'>Checkout</h1>
+            <h1 className='text-xl'>Checkout</h1>
             <h1 className='text-lg'>Total price: {cart.totalPrice}$</h1>
           </div>
           <div className='flex w-full items-center flex-wrap justify-center'>
@@ -132,7 +132,7 @@ const Checkout: React.FC = (): React.ReactElement => {
               </>
             )}
           </div>
-          <Button label='Proceed with payment' />
+          <Button label='Proceed with payment (Coming soon)' disabled />
         </div>
       </div>
     </div>

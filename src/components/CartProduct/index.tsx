@@ -19,7 +19,7 @@ const CartProduct: React.FC<Props> = ({
 
   return (
     <div key={product.id} className='flex space-x-3 items-center w-full'>
-      <img className='h-12 w-12' src={product.image} alt='product-img' />
+      <img className='h-12' src={product.image} alt='product-img' />
       <p>{product.name}</p>
       <p>{product.quantity}</p>
       <div className='cursor-pointer' onClick={onRemoveProduct}>

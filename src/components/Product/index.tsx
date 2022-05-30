@@ -19,7 +19,7 @@ const ProductItem: React.FC<Props> = ({
     <div className='flex rounded-md shadow-md w-96 h-96 bg-white m-3 p-4 justify-center'>
       <div className='flex flex-col items-center'>
         <div className='p-2 mb-6'>
-          <img src={product.image} alt='product-img' className='h-40 w-40' />
+          <img src={product.image} alt='product-img' className='h-40' />
         </div>
         <h3 className='text-xl'>{product.name}</h3>
         <p className='text-base text-gray-500'>{`${product.price}$ - ${product.type}`}</p>
