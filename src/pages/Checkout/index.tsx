@@ -94,7 +94,7 @@ const Checkout: React.FC = (): React.ReactElement => {
           addProductToCart({
             products: newShop,
             cart: {
-              ...newCart,
+              products: sortById(newCart.products),
               totalPrice: newCart.totalPrice - product.price,
             },
           }),
