@@ -127,7 +127,7 @@ const Header: React.FC = (): React.ReactElement => {
         )}
         {isOpen && (
           <div
-            className='absolute bg-white w-72 top-14 right-0 max-h-96 overflow-y-auto shadow-md rounded-md p-6 space-y-4'
+            className='absolute bg-white w-72 top-14 right-0 max-h-96 overflow-y-auto shadow-md rounded-md p-6 space-y-4 scroller'
             onMouseLeave={() => setIsOpen(false)}
           >
             {cart.products.length === 0 ? (

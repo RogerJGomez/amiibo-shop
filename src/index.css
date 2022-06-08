@@ -29,3 +29,41 @@ body {
   }
 
 }
+
+/* Works on Firefox */
+.scroller {
+  scrollbar-width: thin;
+  scrollbar-color: #7c7c7c #bebebe;
+}
+
+/* width */
+.scroller::-webkit-scrollbar {
+  width: 8px;
+  height: 10px;
+}
+
+/* Track */
+.scroller::-webkit-scrollbar-track {
+  background: #f2f2f2;
+}
+
+/* Handle */
+.scroller::-webkit-scrollbar-thumb {
+  background: #bebebe;
+  border-radius: 20px;
+}
+
+/* Corner */
+.scroller::-webkit-scrollbar-corner {
+  background: #f1f1f1;
+}
+
+/* Handle on hover */
+.scroller::-webkit-scrollbar-thumb:hover {
+  background: #7c7c7c;
+}
+
+/* Handle horizontal */
+.scroller::-webkit-scrollbar-thumb:horizontal {
+  width: 0.5rem;
+}
