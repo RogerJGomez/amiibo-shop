@@ -7,3 +7,25 @@ body {
   background: rgb(244,240,243);
   background: linear-gradient(135deg, rgba(244,240,243,1) 50%, rgba(234,243,247,1) 100%);
 }
+
+@layer base {
+  @font-face {
+    font-family: 'JosefinSans-SemiBold';
+    src: local('JosefinSans-SemiBold'), url(./assets/fonts/JosefinSans-SemiBold.ttf) format('truetype');
+  }
+
+  @font-face {
+    font-family: 'JosefinSans-Regular';
+    src: local('JosefinSans-Regular'), url(./assets/fonts/JosefinSans-Regular.ttf) format('truetype');
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-josefinSemiBold;
+    @apply text-xl;
+  }
+
+  p, a, li, div {
+    @apply font-josefin;
+  }
+
+}
