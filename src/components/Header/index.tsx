@@ -9,7 +9,7 @@ import {
   Product,
   productsSelector,
 } from '../../reducers/shopReducer'
-import { getTotalPrice } from '../../utils'
+import { getTotalPrice, sortById } from '../../utils'
 import Button from '../Button'
 import CartProduct from '../CartProduct'
 
@@ -47,7 +47,7 @@ const Header: React.FC = (): React.ReactElement => {
           addProductToCart({
             products: newShop,
             cart: {
-              ...newCart,
+              products: sortById(newCart.products),
               totalPrice: newCart.totalPrice + product.price,
             },
           }),
@@ -58,7 +58,7 @@ const Header: React.FC = (): React.ReactElement => {
           addProductToCart({
             products: newShop,
             cart: {
-              products: newCartProducts,
+              products: sortById(newCartProducts),
               totalPrice: getTotalPrice(newCartProducts),
             },
           }),
@@ -98,7 +98,7 @@ const Header: React.FC = (): React.ReactElement => {
           addProductToCart({
             products: newShop,
             cart: {
-              ...newCart,
+              products: sortById(newCart.products),
               totalPrice: newCart.totalPrice - product.price,
             },
           }),

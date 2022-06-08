@@ -12,3 +12,9 @@ export const getTotalPrice = (products: Product[]): number => {
 
   return totalPrice
 }
+
+export const sortById = (products: Product[]): Product[] => {
+  return products.sort((productA, productB) =>
+    productA.id < productB.id ? -1 : productA.id > productB.id ? 1 : 0,
+  )
+}

@@ -10,7 +10,7 @@ import {
 import { getProducts } from '../../services'
 import ProductItem from '../../components/Product'
 import SpinnerLoader from '../../components/Spinner'
-import { getTotalPrice } from '../../utils'
+import { getTotalPrice, sortById } from '../../utils'
 
 const Home: React.FC = (): React.ReactElement => {
   const dispatch = useDispatch()
@@ -51,7 +51,7 @@ const Home: React.FC = (): React.ReactElement => {
           addProductToCart({
             products: newShop,
             cart: {
-              ...newCart,
+              products: sortById(newCart.products),
               totalPrice: newCart.totalPrice + product.price,
             },
           }),
@@ -62,7 +62,7 @@ const Home: React.FC = (): React.ReactElement => {
           addProductToCart({
             products: newShop,
             cart: {
-              products: newCartProducts,
+              products: sortById(newCartProducts),
               totalPrice: getTotalPrice(newCartProducts),
             },
           }),
