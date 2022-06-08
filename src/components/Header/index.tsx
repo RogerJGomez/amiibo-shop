@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import CartImg from '../../assets/img/cart.png'
+import Logo from '../../assets/img/amiibo-logo.png'
 import {
   addProductToCart,
   cartSelector,
@@ -108,9 +109,9 @@ const Header: React.FC = (): React.ReactElement => {
   )
 
   return (
-    <div className='h-24 w-full bg-white shadow-inner py-4 px-8 fixed top-0 flex items-center justify-between'>
+    <nav className='h-28 w-full bg-white shadow-inner py-4 px-8 fixed top-0 flex items-center justify-between'>
       <Link to='/'>
-        <h1 className='text-xl'>E-Commerce</h1>
+        <img src={Logo} className='h-10' alt='logo' />
       </Link>
       <div className='relative'>
         <img
@@ -153,7 +154,7 @@ const Header: React.FC = (): React.ReactElement => {
           </div>
         )}
       </div>
-    </div>
+    </nav>
   )
 }
 

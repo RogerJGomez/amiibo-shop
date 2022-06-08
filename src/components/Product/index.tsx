@@ -15,20 +15,22 @@ const ProductItem: React.FC<Props> = ({
   onRemoveProduct,
   isShop = true,
 }: Props): React.ReactElement => {
+  const { image, name, price, type, quantity, maxStock } = product
+
   return (
     <div className='flex rounded-md shadow-md w-96 h-96 bg-white m-3 p-4 justify-center'>
       <div className='flex flex-col items-center'>
         <div className='p-2 mb-6'>
-          <img src={product.image} alt='product-img' className='h-40' />
+          <img src={image} alt='product-img' className='h-40' />
         </div>
-        <h3 className='text-xl'>{product.name}</h3>
-        <p className='text-base text-gray-500'>{`${product.price}$ - ${product.type}`}</p>
-        <p className='text-base text-gray-500 mb-4'>{`Stock: ${product.quantity}`}</p>
+        <h3 className='text-xl'>{name}</h3>
+        <p className='text-base text-gray-500'>{`${price}$ - ${type}`}</p>
+        <p className='text-base text-gray-500 mb-4'>{`Stock: ${quantity}`}</p>
         {isShop ? (
           <Button
             label='Add to Cart'
             onClick={onAddProduct}
-            disabled={product.quantity === 0}
+            disabled={quantity === 0}
           />
         ) : (
           <div className='flex w-full space-x-6 justify-center'>
@@ -36,7 +38,7 @@ const ProductItem: React.FC<Props> = ({
             <Button
               label='+'
               onClick={onAddProduct}
-              disabled={product.quantity === product.maxStock}
+              disabled={quantity === maxStock}
             />
           </div>
         )}
