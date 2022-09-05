@@ -1,94 +1,65 @@
-import React, { useCallback, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  addProductToCart,
-  cartSelector,
   loadingSelector,
   Product,
   productsSelector,
-} from '../../reducers/shopReducer'
-import { getProducts } from '../../services'
-import ProductItem from '../../components/Product'
-import SpinnerLoader from '../../components/Spinner'
-import { getTotalPrice, sortById } from '../../utils'
+} from "../../reducers/shopReducer";
+import { getProducts } from "../../services";
+import ProductItem from "../../components/Product";
+import SpinnerLoader from "../../components/Spinner";
+import Pagination from "../../components/Pagination";
+import useShop from "../../hooks/useShop";
 
 const Home: React.FC = (): React.ReactElement => {
-  const dispatch = useDispatch()
-  const loading = useSelector(loadingSelector)
-  const products = useSelector(productsSelector)
-  const cart = useSelector(cartSelector)
+  const [page, setPage] = useState<number>(1);
+  const dispatch = useDispatch();
+  const loading = useSelector(loadingSelector);
+  const products = useSelector(productsSelector);
+  const [addProduct] = useShop();
+  const pageSize = 8;
 
   useEffect(() => {
     if (products.length === 0) {
-      dispatch(getProducts() as any)
+      dispatch(getProducts() as any);
     }
-  }, [dispatch, products])
+  }, [dispatch, products]);
 
-  const addProduct = useCallback(
-    (product: Product): void => {
-      const newShop = products.map(prod => {
-        if (prod.id === product.id) {
-          return { ...prod, quantity: prod.quantity - 1 }
-        }
-        return prod
-      })
+  const onChangePage = useCallback((page: number): void => {
+    setPage(page);
+  }, []);
 
-      const foundProduct = cart.products.find(prod => prod.id === product.id)
+  const storeProducts = useMemo((): Product[] => {
+    const from = (page - 1) * pageSize;
+    const to = from + pageSize;
 
-      if (foundProduct) {
-        const newCartProducts = cart.products.filter(
-          prod => prod.id !== product.id,
-        )
-        const newCart = {
-          ...cart,
-          products: [
-            ...newCartProducts,
-            { ...foundProduct, quantity: foundProduct.quantity + 1 },
-          ],
-        }
-
-        dispatch(
-          addProductToCart({
-            products: newShop,
-            cart: {
-              products: sortById(newCart.products),
-              totalPrice: newCart.totalPrice + product.price,
-            },
-          }),
-        )
-      } else {
-        const newCartProducts = [...cart.products, { ...product, quantity: 1 }]
-        dispatch(
-          addProductToCart({
-            products: newShop,
-            cart: {
-              products: sortById(newCartProducts),
-              totalPrice: getTotalPrice(newCartProducts),
-            },
-          }),
-        )
-      }
-    },
-    [cart, dispatch, products],
-  )
+    return products.slice(from, to);
+  }, [products, page]);
 
   return (
-    <div className='flex w-full h-full justify-center flex-wrap mt-32 mb-12'>
-      {loading ? (
-        <SpinnerLoader />
-      ) : (
-        <>
-          {products.map(product => (
-            <ProductItem
-              key={product.id}
-              product={product}
-              onAddProduct={() => addProduct(product)}
-            />
-          ))}
-        </>
-      )}
-    </div>
-  )
-}
+    <Pagination
+      initialPage={1}
+      totalPages={products.length / pageSize}
+      pageSize={pageSize}
+      onChange={onChangePage}
+    >
+      <div className="flex w-full h-full justify-center flex-wrap gap-1 mt-32 mb-4">
+        {loading ? (
+          <SpinnerLoader />
+        ) : (
+          <>
+            {storeProducts.map((product) => (
+              <ProductItem
+                key={product.id}
+                product={product}
+                onAddProduct={() => addProduct(product)}
+              />
+            ))}
+          </>
+        )}
+      </div>
+    </Pagination>
+  );
+};
 
-export default Home
+export default Home;

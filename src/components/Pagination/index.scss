@@ -1,0 +1,27 @@
+.container-pagination {
+    @apply flex;
+    @apply flex-row;
+    @apply justify-center;
+    @apply py-4;
+    @apply space-x-2;
+  }
+  
+  .page,
+  .nav {
+    @apply flex;
+    @apply items-center;
+    @apply justify-center;
+  }
+  
+  .page-link {
+    font-size: 1rem;
+  }
+  
+  .active-tab {
+    @apply text-emerald-400;
+  }
+  
+  .disabled-link {
+    @apply invisible;
+  }
+  
